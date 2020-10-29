@@ -2,19 +2,18 @@
 import json
 import random
 import os
+import sys
 
 # Defining classes
 
 
 class A_Question():
+    # Creates Questions from imported JSON
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
         self.answers = self.incorrect + [str(self.correct)]
         random.shuffle(self.answers)
-
-    def __del__(self):
-        del self.answers
 
 
 class TheQuiz(list):
@@ -30,13 +29,9 @@ class TheQuiz(list):
         return cls(singles)
 
 
-
-
-
-
 # change directory to that of the script
 os.chdir(os.path.dirname(__file__))
-# Parsing the JSON file for the question generator
+# Importing JSON file for the question generator
 with open('Apprentice_TandemFor400_Data.json',encoding='utf-8') as f:
     dataset = json.load(f)
 
@@ -45,8 +40,33 @@ def run_the_quiz():
     random.shuffle(dataset)
 
     # Welcome to the Trivia Quiz
-    print("Welcome to the Trivia Quiz!\n\nHopefully this will help you get better at answering questions!")
-    how_many = input("How many questions would you like?  ")
+    print("----------------------------\nWelcome to the Trivia Quiz!\n----------------------------\n\nHopefully this will help you get better at answering questions!")
+    begin_prompt = True
+    how_many = ""
+    while begin_prompt == True:
+        standard_round = input("\nWould you like to play a standard round of Trivia? (y/n)  ").lower()
+        if standard_round == "y":
+            how_many = 10
+            begin_prompt = False
+        elif standard_round == "n":
+            custom_round = input("\nWould you like a custom round? (y/n)  ").lower()
+            if custom_round == "y":
+                how_many = input("\nHow many questions would you like?  ")
+                while str(type(how_many)) != "<class 'int'>":
+                    try:
+                        how_many = int(how_many)
+                    except ValueError:
+                        print("\nI'm sorry, I don't recognize that answer.")
+                        how_many = input("\nHow many questions would you like?  ")
+                    else:
+                        begin_prompt = False
+            elif custom_round == "n":
+                print("\nHave a nice day!")
+                sys.exit()
+            else:
+                print("\nI'm sorry, I don't recognize that answer.")
+        else:
+            print("\nI'm sorry, I don't recognize that answer.")
 
     qz = TheQuiz.create_thequiz(dataset, how_many)
 
@@ -65,19 +85,21 @@ def run_the_quiz():
             num += 1
             print ("{}.".format(num), j)
         try:
-            checker = int(input("\nAnswer: "))                           
+            checker = abs(int(input("\nAnswer: ")))                           
         except ValueError:
-            print("\nYou must enter a number from the list of numbers\n\n")
+            print("\nThat's not a valid answer! \nPlease only enter an answer in the valid range of answers.\n The answer was {}\n".format(qz.singles[i].correct))
         else:
             try:                
                 # Display correct answer after submission
-                if qz.singles[i].answers[checker-1] == qz.singles[i].correct:
+                if checker == 0:
+                    print("\nThat's not a valid answer! \nPlease only enter an answer in the valid range of answers.\n The answer was {}\n".format(qz.singles[i].correct))
+                elif qz.singles[i].answers[checker-1] == qz.singles[i].correct:
                     number_right +=1
                     print("\nYou're Right!\n\n")
                 else:
                     print("\nSorry, the right answer was {}\n\n".format(qz.singles[i].correct))
             except IndexError:
-                print("\nThat's not a valid answer! \nPlease only enter an answer in the valid range of answers.\n\n")
+                print("\nThat's not a valid answer! \nPlease only enter an answer in the valid range of answers.\n The answer was {}\n".format(qz.singles[i].correct))
             
     # Resulting Score, play again prompt
     print("Congrats! Your score was: {}/{}".format(number_right, number_total))
@@ -85,7 +107,7 @@ def run_the_quiz():
 run_the_quiz()
 
 while True:
-    play_again = input("Do you want to play again? (y/n):  ")
+    play_again = input("Do you want to play again? (y/n):  ").lower()
     if play_again == "y":
         run_the_quiz()
     elif play_again == "n":
