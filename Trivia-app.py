@@ -75,7 +75,7 @@ def run_the_quiz():
     quest_num = 0
 
     # asking the user the questions 1 at a time
-
+    print("\n\n----------------------------------------------------------------------\nEnter the Number associated with the answer you would like to submit\n----------------------------------------------------------------------\n")
     for i in range(len(qz.singles)):
         quest_num += 1
         print ("\nQuestion {}.\n".format(quest_num), qz.singles[i].question, "\n")
