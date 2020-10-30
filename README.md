@@ -16,7 +16,7 @@ An app that can be used to study or learn trivia!
 4. Enjoy!
 
 
-##Data Format:
+## Data Format:
 
 To add further data, or a separate questions list requires .json files formatted as shown below. The file must be added to the directory, and the name of the file must be changed in the open statement in Trivia-app.py.
 
