@@ -4,8 +4,8 @@ An app that can be used to study or learn trivia!
 
 ## To Run:
 
-1. Ensure Python 3 is installed on your computer
-2. Ensure the .json data file and Trivia-app.py are in the same folder on your computer.
+1. Ensure Python 3 is installed on your computer, if not download Python 3 at https://www.python.org/
+2. Ensure the .json data file and Trivia-app.py are in the same folder/directory on your computer.
 3. Run the Trivia-app.py file.
 
 ## To Use:
@@ -27,3 +27,27 @@ To add further data, or a separate questions list requires .json files formatted
     "correct": "A"
   },
 ]
+
+
+## Additional Features to add:
+
+Graphical User Interface to increase read ability and User experience.
+
+A timer, to record time to answer metrics and provide user with performance statistics
+
+A user friendly method to switch .json files if necessary in the future.
+
+The ability to accept other files types and parse the questions from them.
+
+A user friendly method to create questions instead of hand typing .json as described above.
+
+A High Scores list, organized by what files were used to generate the quiz.
+
+A Unit test of some kind to automate testing as additional features are added.
+
+## Known Issues
+
+
+
+
+
