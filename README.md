@@ -45,7 +45,14 @@ A High Scores list, organized by what files were used to generate the quiz.
 
 A Unit test of some kind to automate testing as additional features are added.
 
-## Known Issues
+## Known Issues:
+
+Ensuring Python 3 is installed and all files from this repository are located in the same directory should allow this to run.
+
+The only python libraries imported are those contained within Python itself.
+
+No currently known issues.
+
 
 
 
