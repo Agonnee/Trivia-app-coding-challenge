@@ -44,7 +44,7 @@ def run_the_quiz():
     begin_prompt = True
     how_many = ""
     while begin_prompt == True:
-        standard_round = input("\nWould you like to play a standard round of Trivia? (y/n)  ").lower()
+        standard_round = input("\nWould you like to play a standard 10 question round of Trivia? (y/n)  ").lower()
         if standard_round == "y":
             how_many = 10
             begin_prompt = False
